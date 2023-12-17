@@ -64,3 +64,17 @@ export const get = {
   handler: (context) => context.path,
 };
 ```
+
+### Dynamic Routes
+
+To create a dynamic route, create a folder with the `:<parameter-name>` format. For example, if we want to create a path that takes in an `id` parameter, we'd create a folder called `:id`. Elysia will put the `id` value in `context.params`
+
+```ts
+export const get = {
+  handler: ({ params }) => {
+    return params.id;
+  },
+};
+```
+
+Now, if we visit `/123`, we will see '123' returned back to us.

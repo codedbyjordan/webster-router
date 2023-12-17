@@ -30,7 +30,7 @@ export async function loadRoutes(
   await Promise.all(importPromises);
 
   for (const [routeName, routeModule] of Object.entries(routeModules)) {
-    const groupName = routeName === "/" ? "" : routeName;
+    const groupName = routeName.split("/")[1];
     for (const method of HTTP_METHODS) {
       const routeModuleMethod = routeModule[method];
       if (!routeModuleMethod) continue;
