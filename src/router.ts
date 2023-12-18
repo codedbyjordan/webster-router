@@ -5,10 +5,10 @@ export type IndexableElysia = Elysia & {
   [key: string]: any;
 };
 
-export interface Route {
+export type Route = {
   handler: (context: Context) => unknown;
   schema?: RouteSchema;
-}
+};
 
 export async function loadRoutes(app: IndexableElysia) {
   const importPromises = [];
