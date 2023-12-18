@@ -1,24 +1,17 @@
 import Elysia from "elysia";
 import { HTTP_METHODS } from "./constants";
 
-export type RouterOptions = {
-  dir?: string;
-};
-
 export type IndexableElysia = Elysia & {
   [key: string]: any;
 };
 
-export async function loadRoutes(
-  app: IndexableElysia,
-  options?: RouterOptions
-) {
+export async function loadRoutes(app: IndexableElysia) {
   const importPromises = [];
   const routeModules: Record<string, any> = {};
 
   const router = new Bun.FileSystemRouter({
     style: "nextjs",
-    dir: options?.dir || "./src/routes",
+    dir: "./src/routes",
   });
 
   for (const [routeName, file] of Object.entries(router.routes)) {
@@ -45,9 +38,9 @@ export async function loadRoutes(
   }
 }
 
-export async function router(options?: RouterOptions) {
+export async function router() {
   const routesPlugin = new Elysia();
-  await loadRoutes(routesPlugin, options);
+  await loadRoutes(routesPlugin);
 
   return routesPlugin;
 }
