@@ -1,9 +1,14 @@
-import Elysia from "elysia";
+import Elysia, { Context, RouteSchema } from "elysia";
 import { HTTP_METHODS } from "./constants";
 
 export type IndexableElysia = Elysia & {
   [key: string]: any;
 };
+
+export interface Route {
+  handler: (context: Context) => unknown;
+  schema?: RouteSchema;
+}
 
 export async function loadRoutes(app: IndexableElysia) {
   const importPromises = [];
