@@ -2,10 +2,7 @@
 
 import Elysia from 'elysia';
 
-export type RouterOptions = {
-	dir?: string;
-};
-declare function router(options?: RouterOptions): Promise<Elysia<"", {
+declare function router(): Promise<Elysia<"", {
 	request: {};
 	store: {};
 }, {
