@@ -25,19 +25,21 @@ const app = new Elysia()
 
 ```ts
 // routes/index.ts
-export const get = {
+import type { Route } from "webster-router";
+
+export const get: Route = {
   handler: () => "Hello, Webster!",
 };
 ```
 
-Routes are defined as variables whose names are HTTP verbs. This means that one route file can handle multiple methods
+Routes are defined as variables whose names are HTTP verbs. If you're using TypeScript, make sure to import the `Route` type. This means that one route file can handle multiple methods
 
 ```ts
-export const get = {
+export const get: Route = {
   handler: () => "Hello, Webster!",
 };
 
-export const delete = {
+export const delete: Route = {
   handler: () => "Bye, Webster. :(",
 };
 ```
@@ -45,7 +47,7 @@ export const delete = {
 Each route is passed an Elysia [Context](https://elysiajs.com/essential/context.html)
 
 ```ts
-export const get = {
+export const get: Route = {
   handler: (context) => context.path,
 };
 ```
@@ -55,7 +57,7 @@ To define a schema, add a `schema` property to a method object, and define the s
 ```ts
 import { t } from 'elysia'
 
-export const get = {
+export const get: Route = {
   schema: {
     query: t.Object({
       name: t.String()
@@ -70,7 +72,7 @@ export const get = {
 To create a dynamic route, create a folder with the `:<parameter-name>` format. For example, if we want to create a path that takes in an `id` parameter, we'd create a folder called `:id`. Elysia will put the `id` value in `context.params`
 
 ```ts
-export const get = {
+export const get: Route = {
   handler: ({ params }) => {
     return params.id;
   },
